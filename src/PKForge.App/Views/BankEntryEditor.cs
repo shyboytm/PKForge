@@ -591,9 +591,7 @@ public static class BankEntryEditor
 
         private async Task EditAbilityAsync()
         {
-            var choices = (Services.HaXMode.IsOn
-                    ? Enumerable.Range(0, _data.AbilityNames.Count).ToList()
-                    : _session.GetAbilityChoices(_detail.Species, _detail.Form))
+            var choices = Enumerable.Range(0, _data.AbilityNames.Count).ToList()
                 .Select(id => new PickItem(id, NameOf(_data.AbilityNames, id))).ToList();
             var pick = await PickerMenu.ShowAsync(_host, "Ability", choices, _detail.Ability);
             if (pick is not null)

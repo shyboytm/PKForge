@@ -159,8 +159,8 @@ public static class InfoPickers
     // ---------- Abilities ----------
 
     /// <summary>
-    /// Ability rows: slot tag (1 / 2 / HIDDEN) and the short effect. Outside HaX mode only
-    /// the species' own abilities are offered; HaX lists them first, then every other one.
+    /// Ability rows: slot tag (1 / 2 / HIDDEN) and the short effect, species' own abilities
+    /// listed first, then every other ability in the game.
     /// </summary>
     public static List<PickItem> AbilityItems(IGameDataService data, ISaveEngineSession? session, int species, int form)
     {
@@ -174,7 +174,6 @@ public static class InfoPickers
             TagColor = a.Slot == "Hidden" ? Color.FromArgb("#B8860B") : UiTokens.Blueprint,
             Keywords = a.Slot,
         }).ToList();
-        if (!Services.HaXMode.IsOn) return items;
 
         var seen = own.Select(a => a.Id).ToHashSet();
         var rest = Enumerable.Range(0, data.AbilityNames.Count)
